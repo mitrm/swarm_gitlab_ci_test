@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: registry.gitlab.com/ruslantm.ru/docker_swarm_test:latest
+    ports:
+      - "8080:80"
+

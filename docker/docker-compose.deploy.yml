@@ -1,0 +1,66 @@
+version: "3.7"
+
+services:
+
+  nginx:
+    image: registry.gitlab.com/<login>/<project>/<service>:latest
+    configs:
+      - source: sec_html
+        target: /usr/share/nginx/html/sec.html
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+    volumes:
+      - nginx-files:/usr/share/nginx/html/:rw
+
+  nginx2:
+    image: nginx:latest
+    configs:
+      - source: sec_html
+        target: /usr/share/nginx/html/sec.html
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "82:80"
+    volumes:
+      - nginx-files:/usr/share/nginx/html/:ro,nocopy
+    depends_on:
+      - nginx
+
+  nginx3:
+    image: registry.gitlab.com/<login>/<project>/<service>:latest
+    configs:
+      - source: sec_html
+        target: /usr/share/nginx/html/sec.html
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "84:80"
+
+
+  visualizer:
+    image: dockersamples/visualizer
+    ports:
+      - "90:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+configs:
+  sec_html:
+    external: true
+
+
+volumes:
+  nginx-files:
+    name: "${CI_COMMIT_SHA}_nginx-files"

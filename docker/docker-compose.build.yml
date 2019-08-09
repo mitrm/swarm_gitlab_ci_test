@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  nginx:
+    build:
+      context: ./nginx/
+      dockerfile: DockerfileBuild
+    env_file: ./../.env
+    ports:
+      - "8080:80"
+

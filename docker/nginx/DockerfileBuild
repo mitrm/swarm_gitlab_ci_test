@@ -1,0 +1,10 @@
+FROM nginx:latest
+WORKDIR ../../../
+COPY ./web/index.html /usr/share/nginx/html/index.html
+
+COPY ./web/index_new.html /usr/share/nginx/html/index_new.html
+COPY ./web/index_new2.html /usr/share/nginx/html/index_new2.html
+COPY ./web/index_new3.html /usr/share/nginx/html/index_new3.html
+COPY ./web/index_new3.html /usr/share/nginx/html/index_new4.html
+
+#COPY index.html /usr/share/nginx/html/index.html

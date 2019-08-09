@@ -1,0 +1,1 @@
+docker build -t registry.gitlab.com/<login>/<project>/<service>  -f docker/nginx/DockerfileBuild .
