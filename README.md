@@ -27,7 +27,7 @@
 
 
 ------
-На сервере docker swarm созадем файл hmtl, любой. И создаем config на этот файл с именем sec_html используется docker/docker-compose.deploy.yml
+На сервере docker swarm созадем файл html, любой. И создаем config на этот файл с именем sec_html используется docker/docker-compose.deploy.yml
 
 
 ----
